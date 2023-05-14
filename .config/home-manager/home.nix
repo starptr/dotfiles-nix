@@ -1,5 +1,8 @@
 { config, pkgs, ... }:
 
+let
+  pkgs-a3fe093 = import (fetchTarball "https://github.com/NixOS/nixpkgs/archive/a3fe093364f627e621deb52e71071e59b14763a4.tar.gz") {};
+in
 {
   # Home Manager needs a bit of information about you and the paths it should
   # manage.
@@ -72,10 +75,20 @@
     da = "ls -Al";
   };
 
+  programs.gh = {
+    package = pkgs-a3fe093.gh;
+    enable = true;
+    settings = {
+      git_protocol = "https";
+    };
+  };
   programs.git = {
     enable = true;
     userName = "Yuto Nishida";
     userEmail = "yuto@berkeley.edu";
+  };
+  programs.ssh = {
+    enable = true;
   };
 
   programs.nushell = {
