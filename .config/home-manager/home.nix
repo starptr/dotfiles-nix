@@ -3,6 +3,9 @@
 let
   pkgs-a3fe093 = import (fetchTarball "https://github.com/NixOS/nixpkgs/archive/a3fe093364f627e621deb52e71071e59b14763a4.tar.gz") {};
 in
+let
+  pkgs-arb-latest = pkgs-a3fe093;
+in
 {
   # Home Manager needs a bit of information about you and the paths it should
   # manage.
@@ -75,8 +78,21 @@ in
     da = "ls -Al";
   };
 
+  programs.bat = {
+    enable = true;
+    config = {
+      #theme = "GitHub";
+    };
+  };
+
+  programs.neovim = {
+    package = pkgs-arb-latest.neovim-unwrapped;
+    enable = true;
+    defaultEditor = true;
+  };
+
   programs.gh = {
-    package = pkgs-a3fe093.gh;
+    package = pkgs-arb-latest.gh;
     enable = true;
     settings = {
       git_protocol = "https";
@@ -86,6 +102,10 @@ in
     enable = true;
     userName = "Yuto Nishida";
     userEmail = "yuto@berkeley.edu";
+    signing = {
+      key = null;
+      signByDefault = false;
+    };
   };
   programs.ssh = {
     enable = true;
