@@ -1,8 +1,9 @@
-{ config, pkgs, ... }:
+{ config, pkgs, myvim, ... }:
 
 let
   # legacy variable from pre-flake config
   pkgs-arb-latest = pkgs;
+  my-hello-source = myvim;
 in
 {
   # Home Manager needs a bit of information about you and the paths it should
@@ -135,6 +136,13 @@ in
   };
   programs.bash = {
     enable = true;
+  };
+
+  xdg = {
+    enable = true;
+    configFile.my-hello = {
+      source = my-hello-source;
+    };
   };
 
   # Let Home Manager install and manage itself.
