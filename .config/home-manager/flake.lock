@@ -38,52 +38,7 @@
         "type": "github"
       }
     },
-    "myvim": {
-      "inputs": {
-        "nixpkgs": "nixpkgs",
-        "nuenv": "nuenv"
-      },
-      "locked": {
-        "lastModified": 1688499523,
-        "narHash": "sha256-e85d/501iDEasK5cqBiDCaY++9CnWskFD3YeovFI0As=",
-        "path": "/home/yuto.linux/src/neovim-nuflake",
-        "type": "path"
-      },
-      "original": {
-        "path": "/home/yuto.linux/src/neovim-nuflake",
-        "type": "path"
-      }
-    },
     "nixpkgs": {
-      "locked": {
-        "lastModified": 1688221086,
-        "narHash": "sha256-cdW6qUL71cNWhHCpMPOJjlw0wzSRP0pVlRn2vqX/VVg=",
-        "owner": "NixOS",
-        "repo": "nixpkgs",
-        "rev": "cd99c2b3c9f160cd004318e0697f90bbd5960825",
-        "type": "github"
-      },
-      "original": {
-        "id": "nixpkgs",
-        "type": "indirect"
-      }
-    },
-    "nixpkgs_2": {
-      "locked": {
-        "lastModified": 1687813817,
-        "narHash": "sha256-Vf9GMNilAJBUPSph/wH65YMhQl6H8nJAtXGtXeaorkI=",
-        "owner": "NixOS",
-        "repo": "nixpkgs",
-        "rev": "d409d42ce7d2f863dddbf19c12c6ccc989a637d6",
-        "type": "github"
-      },
-      "original": {
-        "owner": "NixOS",
-        "repo": "nixpkgs",
-        "type": "github"
-      }
-    },
-    "nixpkgs_3": {
       "locked": {
         "lastModified": 1687502512,
         "narHash": "sha256-dBL/01TayOSZYxtY4cMXuNCBk8UMLoqRZA+94xiFpJA=",
@@ -99,34 +54,66 @@
         "type": "github"
       }
     },
+    "nixpkgs_2": {
+      "locked": {
+        "lastModified": 1688221086,
+        "narHash": "sha256-cdW6qUL71cNWhHCpMPOJjlw0wzSRP0pVlRn2vqX/VVg=",
+        "owner": "NixOS",
+        "repo": "nixpkgs",
+        "rev": "cd99c2b3c9f160cd004318e0697f90bbd5960825",
+        "type": "github"
+      },
+      "original": {
+        "id": "nixpkgs",
+        "type": "indirect"
+      }
+    },
+    "nixpkgs_3": {
+      "locked": {
+        "lastModified": 1687813817,
+        "narHash": "sha256-Vf9GMNilAJBUPSph/wH65YMhQl6H8nJAtXGtXeaorkI=",
+        "owner": "NixOS",
+        "repo": "nixpkgs",
+        "rev": "d409d42ce7d2f863dddbf19c12c6ccc989a637d6",
+        "type": "github"
+      },
+      "original": {
+        "owner": "NixOS",
+        "repo": "nixpkgs",
+        "type": "github"
+      }
+    },
     "nuenv": {
       "inputs": {
-        "nixpkgs": "nixpkgs_2",
+        "nixpkgs": "nixpkgs_3",
         "rust-overlay": "rust-overlay"
       },
       "locked": {
-        "lastModified": 1688499478,
-        "narHash": "sha256-41LqynEan+ta2Zw8oXGhRVN9nTI4Q1ad5XQHttmkkwg=",
-        "path": "/home/yuto.linux/src/nuenv",
-        "type": "path"
+        "lastModified": 1687815272,
+        "narHash": "sha256-c8hyVpYQ5M6/4jlEOMC2nxrsWaVHqYfrBJX7KFMCJA4=",
+        "owner": "DeterminateSystems",
+        "repo": "nuenv",
+        "rev": "e7ffcac15811166a717b240d60d2c7190a13410c",
+        "type": "github"
       },
       "original": {
-        "path": "/home/yuto.linux/src/nuenv",
-        "type": "path"
+        "owner": "DeterminateSystems",
+        "repo": "nuenv",
+        "type": "github"
       }
     },
     "root": {
       "inputs": {
         "home-manager": "home-manager",
-        "myvim": "myvim",
-        "nixpkgs": "nixpkgs_3"
+        "nixpkgs": "nixpkgs",
+        "timevim": "timevim"
       }
     },
     "rust-overlay": {
       "inputs": {
         "flake-utils": "flake-utils",
         "nixpkgs": [
-          "myvim",
+          "timevim",
           "nuenv",
           "nixpkgs"
         ]
@@ -158,6 +145,22 @@
         "owner": "nix-systems",
         "repo": "default",
         "type": "github"
+      }
+    },
+    "timevim": {
+      "inputs": {
+        "nixpkgs": "nixpkgs_2",
+        "nuenv": "nuenv"
+      },
+      "locked": {
+        "lastModified": 1688503275,
+        "narHash": "sha256-5aeeqijjN8GD5U2cy5mRZIrMCGYfcrOF5aBm0ENLclk=",
+        "type": "git",
+        "url": "file:./../../src/neovim-nuflake"
+      },
+      "original": {
+        "type": "git",
+        "url": "file:./../../src/neovim-nuflake"
       }
     }
   },

@@ -8,14 +8,17 @@
       url = "github:nix-community/home-manager";
       inputs.nixpkgs.follows = "nixpkgs";
     };
-    myvim.url = "path:/home/yuto.linux/src/neovim-nuflake";
+    timevim = {
+      flake = true;
+      url = "git+file:./../../src/neovim-nuflake";
+    };
   };
 
-  outputs = { nixpkgs, home-manager, myvim, ... }:
+  outputs = { nixpkgs, home-manager, timevim, ... }:
     let
       system = "aarch64-linux";
       pkgs = nixpkgs.legacyPackages.${system};
-    in {
+    in let
       homeConfigurations."yuto" = home-manager.lib.homeManagerConfiguration {
         inherit pkgs;
 
@@ -26,8 +29,10 @@
         # Optionally use extraSpecialArgs
         # to pass through arguments to home.nix
         extraSpecialArgs = {
-          myvim = import myvim.packages.${system}.default {};
+          timevim = timevim.outputs.packages.${system}.default;
         };
       };
+    in {
+      homeConfigurations."yuto" = homeConfigurations."yuto";
     };
 }

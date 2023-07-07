@@ -1,9 +1,8 @@
-{ config, pkgs, myvim, ... }:
+{ config, pkgs, timevim, ... }:
 
 let
   # legacy variable from pre-flake config
   pkgs-arb-latest = pkgs;
-  my-hello-source = myvim;
 in
 {
   # Home Manager needs a bit of information about you and the paths it should
@@ -43,6 +42,8 @@ in
 
     # needed for un-nixed treesitter install
     pkgs.gcc
+
+    #(pkgs.callPackage timevim.packages.aarch64-linux.default {})
   ];
 
   # Home Manager is pretty good at managing dotfiles. The primary way to manage
@@ -141,7 +142,7 @@ in
   xdg = {
     enable = true;
     configFile.my-hello = {
-      source = my-hello-source;
+      source = timevim;
     };
   };
 
