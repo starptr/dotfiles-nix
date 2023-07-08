@@ -8,17 +8,22 @@
       url = "github:nix-community/home-manager";
       inputs.nixpkgs.follows = "nixpkgs";
     };
-    timevim = {
-      flake = true;
+    timevim-local = {
       url = "git+file:./../../src/neovim-nuflake";
+    };
+    timevim-remote = {
+      url = "github:starptr/nvim-flaked";
     };
   };
 
-  outputs = { nixpkgs, home-manager, timevim, ... }:
+  outputs = { nixpkgs, home-manager, ... } @ inputs:
     let
+      # Configure specific input
+      timevim = inputs.timevim-local;
+    in let
       system = "aarch64-linux";
       pkgs = nixpkgs.legacyPackages.${system};
-    in let
+    in {
       homeConfigurations."yuto" = home-manager.lib.homeManagerConfiguration {
         inherit pkgs;
 
@@ -32,7 +37,5 @@
           timevim = timevim.outputs.packages.${system}.default;
         };
       };
-    in {
-      homeConfigurations."yuto" = homeConfigurations."yuto";
     };
 }
