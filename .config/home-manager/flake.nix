@@ -8,6 +8,7 @@
       url = "github:nix-community/home-manager";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+    vscode-server.url = "github:nix-community/nixos-vscode-server";
     timevim-local = {
       url = "git+file:./../../src/neovim-nuflake";
     };
@@ -29,7 +30,12 @@
 
         # Specify your home configuration modules here, for example,
         # the path to your home.nix.
-        modules = [ ./home.nix ];
+        modules = [
+          ./home.nix
+          inputs.vscode-server.nixosModules.default ({ config, pkgs, ... }: {
+            services.vscode-server.enable = true;
+          })
+        ];
 
         # Optionally use extraSpecialArgs
         # to pass through arguments to home.nix
