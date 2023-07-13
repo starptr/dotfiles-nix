@@ -20,28 +20,33 @@
   outputs = { nixpkgs, home-manager, ... } @ inputs:
     let
       # Configure specific input
-      timevim = inputs.timevim-local;
+      timevim = inputs.timevim-remote;
     in let
       system = "aarch64-linux";
       pkgs = nixpkgs.legacyPackages.${system};
+      # lima generates username based on host username
+      usernames = [ "yuto" "ynishida" ];
+      fillHolesInConfigs = f: builtins.listToAttrs (map (username: nixpkgs.lib.attrsets.nameValuePair username (f { inherit username; })) usernames);
+      #forAllUsernames = (value: { "yuto" = value; });
     in {
-      homeConfigurations."yuto" = home-manager.lib.homeManagerConfiguration {
+      homeConfigurations = fillHolesInConfigs ({ username }: home-manager.lib.homeManagerConfiguration {
         inherit pkgs;
 
         # Specify your home configuration modules here, for example,
         # the path to your home.nix.
         modules = [
           ./home.nix
-          inputs.vscode-server.nixosModules.default ({ config, pkgs, ... }: {
-            services.vscode-server.enable = true;
-          })
+          #inputs.vscode-server.nixosModules.default ({ config, pkgs, ... }: {
+          #  services.vscode-server.enable = true;
+          #})
         ];
 
         # Optionally use extraSpecialArgs
         # to pass through arguments to home.nix
         extraSpecialArgs = {
+          inherit username;
           timevim = timevim.outputs.packages.${system}.default;
         };
-      };
+      });
     };
 }

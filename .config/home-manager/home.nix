@@ -1,4 +1,4 @@
-{ config, pkgs, timevim, ... }:
+{ config, pkgs, username, timevim, ... }:
 
 let
   # legacy variable from pre-flake config
@@ -7,8 +7,8 @@ in
 {
   # Home Manager needs a bit of information about you and the paths it should
   # manage.
-  home.username = "yuto";
-  home.homeDirectory = "/home/yuto.linux";
+  home.username = username;
+  home.homeDirectory = "/home/${username}.linux";
 
   # This value determines the Home Manager release that your configuration is
   # compatible with. This helps avoid breakage when a new Home Manager release
