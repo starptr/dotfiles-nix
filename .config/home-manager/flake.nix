@@ -36,9 +36,9 @@
         # the path to your home.nix.
         modules = [
           ./home.nix
-          #inputs.vscode-server.nixosModules.default ({ config, pkgs, ... }: {
-          #  services.vscode-server.enable = true;
-          #})
+          inputs.vscode-server.homeModules.default ({ config, pkgs, ... }: {
+            services.vscode-server.enable = true;
+          })
         ];
 
         # Optionally use extraSpecialArgs
